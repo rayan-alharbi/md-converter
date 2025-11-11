@@ -1,0 +1,128 @@
+/* RTL (Right-to-Left) Support */
+
+/* Apply RTL to the document when dir="rtl" is set */
+[dir="rtl"] {
+    direction: rtl;
+}
+
+/* Header adjustments for RTL */
+[dir="rtl"] .header-content {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .header-actions {
+    flex-direction: row-reverse;
+}
+
+/* Toolbar adjustments for RTL */
+[dir="rtl"] .toolbar {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .toolbar-group {
+    flex-direction: row-reverse;
+}
+
+/* Pane header adjustments */
+[dir="rtl"] .pane-header {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .pane-actions {
+    flex-direction: row-reverse;
+}
+
+/* Editor and preview swap sides */
+[dir="rtl"] .main-content {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .editor-pane {
+    border-right: none;
+    border-left: 2px solid var(--border-color);
+}
+
+/* Preview content text alignment */
+[dir="rtl"] .preview-content {
+    text-align: right;
+}
+
+[dir="rtl"] .preview-content table th,
+[dir="rtl"] .preview-content table td {
+    text-align: right;
+}
+
+/* Lists in RTL */
+[dir="rtl"] .preview-content ul,
+[dir="rtl"] .preview-content ol {
+    padding-right: 2rem;
+    padding-left: 0;
+}
+
+/* Blockquotes in RTL */
+[dir="rtl"] .preview-content blockquote {
+    border-left: none;
+    border-right: 4px solid var(--primary-color);
+}
+
+/* Task lists in RTL */
+[dir="rtl"] .preview-content .task-list-item {
+    margin-right: -2rem;
+    margin-left: 0;
+}
+
+[dir="rtl"] .preview-content .task-list-item input[type="checkbox"] {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+/* Code blocks remain LTR for programming languages */
+[dir="rtl"] .preview-content pre,
+[dir="rtl"] .preview-content code {
+    direction: ltr;
+    text-align: left;
+}
+
+/* But allow inline code to follow text direction */
+[dir="rtl"] .preview-content p code,
+[dir="rtl"] .preview-content li code {
+    direction: rtl;
+}
+
+/* Footer in RTL */
+[dir="rtl"] .app-footer {
+    text-align: center;
+}
+
+/* Responsive adjustments for RTL */
+@media (max-width: 1024px) {
+    [dir="rtl"] .editor-pane {
+        border-left: none;
+        border-bottom: 2px solid var(--border-color);
+    }
+}
+
+/* Logical properties for better RTL support */
+.preview-content {
+    padding-inline: 2rem;
+}
+
+.editor {
+    padding-inline: 1.5rem;
+}
+
+.btn {
+    padding-inline: 1rem;
+}
+
+.toolbar {
+    padding-inline: 2rem;
+}
+
+.header-content {
+    padding-inline: 2rem;
+}
+
+.app-footer {
+    padding-inline: 2rem;
+}

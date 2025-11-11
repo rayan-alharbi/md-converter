@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown to HTML with PDF Export</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/rtl.css">
+    <link rel="stylesheet" href="css/themes.css">
+    
+    <!-- Prism.js theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@13.0.2/dist/markdown-it.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it-footnote@3.0.3/dist/markdown-it-footnote.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it-task-lists@2.1.1/dist/markdown-it-task-lists.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it-anchor@8.6.7/dist/markdownItAnchor.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1>📝 Markdown to HTML</h1>
+                <div class="header-actions">
+                    <button id="toggleTheme" class="btn btn-icon" title="Toggle Theme">🌓</button>
+                    <button id="toggleDir" class="btn btn-icon" title="Toggle Text Direction">↔️</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="toolbar-group">
+                <button id="newDoc" class="btn" title="New Document">📄 New</button>
+                <button id="loadSample" class="btn" title="Load Sample">📋 Sample</button>
+            </div>
+            
+            <div class="toolbar-group">
+                <label class="toolbar-label">Theme:</label>
+                <select id="themeSelect" class="select">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="sepia">Sepia</option>
+                    <option value="github">GitHub</option>
+                </select>
+            </div>
+            
+            <div class="toolbar-group">
+                <label class="toolbar-label">Font Size:</label>
+                <select id="fontSizeSelect" class="select">
+                    <option value="14">14px</option>
+                    <option value="16" selected>16px</option>
+                    <option value="18">18px</option>
+                    <option value="20">20px</option>
+                    <option value="22">22px</option>
+                </select>
+            </div>
+            
+            <div class="toolbar-group">
+                <button id="exportMd" class="btn btn-export" title="Export as Markdown">⬇️ .md</button>
+                <button id="exportHtml" class="btn btn-export" title="Export as HTML">⬇️ .html</button>
+                <button id="exportPng" class="btn btn-export" title="Export as PNG">⬇️ .png</button>
+                <button id="exportPdf" class="btn btn-export" title="Export as PDF (Auto)">⬇️ .pdf</button>
+                <button id="printPdf" class="btn btn-export" title="Print to PDF (Recommended for long documents)" style="background-color: #28a745; border-color: #28a745;">🖨️ print</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Editor Pane -->
+            <div class="pane editor-pane">
+                <div class="pane-header">
+                    <h2>Editor</h2>
+                    <div class="pane-actions">
+                        <button id="clearEditor" class="btn-small" title="Clear">🗑️</button>
+                        <button id="wordCount" class="btn-small info" title="Word Count">0 words</button>
+                    </div>
+                </div>
+                <textarea id="mdInput" class="editor" placeholder="Start typing your Markdown here...
+                
+Try some examples:
+# Heading 1
+## Heading 2
+
+**Bold text** and *italic text*
+
+- List item 1
+- List item 2
+
+```javascript
+console.log('Hello, World!');
+```
+
+Math: $E = mc^2$
+
+| Column 1 | Column 2 |
+|----------|----------|
+| Data 1   | Data 2   |
+
+[Link](https://example.com)
+![Image](https://via.placeholder.com/150)
+"></textarea>
+            </div>
+
+            <!-- Preview Pane -->
+            <div class="pane preview-pane">
+                <div class="pane-header">
+                    <h2>Preview</h2>
+                    <div class="pane-actions">
+                        <button id="fullscreen" class="btn-small" title="Fullscreen Preview">⛶</button>
+                        <button id="copyPreview" class="btn-small" title="Copy HTML">📋</button>
+                    </div>
+                </div>
+                <div id="preview" class="preview-content"></div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Markdown to HTML Converter with PDF Export | No backend required | Data stays in your browser</p>
+        </footer>
+    </div>
+
+    <!-- App Scripts -->
+    <script src="js/prefs.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="js/export.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

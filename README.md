@@ -9,7 +9,7 @@ A powerful, fully **client-side** Markdown editor with real-time HTML preview an
 ### Core Functionality
 - 📝 **Real-time Markdown Preview** - See your formatted content as you type
 - 🎨 **Multiple Themes** - Light, Dark, Sepia, and GitHub themes
-- ↔️ **RTL Support** - Full support for right-to-left languages (Arabic, Hebrew, etc.)
+- ↔️ **RTL Support** - Full support for right-to-left languages (Arabic,etc.)
 - 💾 **Auto-save** - Your work is automatically saved in browser storage
 - 📊 **Word Counter** - Real-time word and character count
 

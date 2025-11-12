@@ -1,4 +1,6 @@
-# Markdown to HTML with PDF Export
+# MD CONVERTER
+---
+
 
 A powerful, fully **client-side** Markdown editor with real-time HTML preview and multiple export options including PDF. No backend required - everything runs in your browser!
 
@@ -56,7 +58,7 @@ Modern browsers with ES6 support and HTML5 features.
 ## 📁 Project Structure
 
 ```
-markdown-to-html/
+MD CONVERTER/
 ├── index.html          # Main HTML file
 ├── css/
 │   ├── base.css       # Base styles and layout
